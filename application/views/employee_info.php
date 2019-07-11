@@ -6,14 +6,17 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<?php echo base_url(); ?>assets/js/sweetalert.min.js"></script>
 </head>
 <body style ="background-color: lightslategray" >
 
 <ul>
-    <li><a href="#home">Dilanka Enterprices</a></li>
+    <li><a href="<?php echo site_url('Add_EmpController/insert');?>">Dilanka Enterprices</a></li>
     <li style="float:right"><a class="active" href="<?php echo site_url('Add_EmpController/insert');?>">Back</a></li>
 </ul>
-
+<!--
+    Employee Information Table
+-->
 
 <table class="table table-dark">
     <thead>
@@ -40,9 +43,37 @@
     
     <tr>
         <th scope="row">'.$row->emp_id.'</th>
-        <td>'.$row->emp_name.'</td>
-        <td>'.$row->emp_gender.'</td>
-        <td>'.$row->status.'</td>
+        <td>'.$row->emp_name.'</td>';
+
+        if ($row->emp_gender==1){
+            echo '<td>Male</td>';
+        }
+        else if($row->emp_gender==2)
+        {
+            echo '<td>Female</td>';
+        }
+
+        if ($row->status==1){
+            echo '<td>Single</td>';
+        }
+        else if($row->status==2)
+        {
+            echo '<td>Married</td>';
+        }
+        else if($row->status==3)
+        {
+            echo '<td>Engaged</td>';
+        }
+        else if($row->status==4)
+        {
+            echo '<td>In a relationship</td>';
+        }
+        else if($row->status==5)
+        {
+            echo '<td>Waiting for a miracle</td>';
+        }
+
+        echo '
         <td>'.$row->address.'</td>
         <td>'.$row->phone_number.'</td>';
 
@@ -116,5 +147,22 @@ document.getElementById("update").value = id;
 
 document.getElementById("updateInformation").submit();
 }
+
+</script>
+
+<!--Alert-->
+
+<script>
+
+    window.onload = function(e){
+        var x="<?php if(isset($_SESSION['success'])){ echo $_SESSION['success'];}?>";
+        if("1"==x){
+            swal("Successful!", "Delete successful!", "success");
+            <?php $this->session->set_flashdata("success",null); ?>
+        }else if("2"==x){
+            swal("Successful!", "Update successful!", "success");
+            <?php $this->session->set_flashdata("success",null); ?>
+        }
+    }
 
 </script>

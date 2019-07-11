@@ -71,7 +71,7 @@ class Add_EmpController extends CI_Controller
 
     }
 
-    /*Update Employee Information*/
+    /*View Update Employee Information*/
 
     public function update()
     {
@@ -81,6 +81,45 @@ class Add_EmpController extends CI_Controller
         $data['emp'] = $this->AddEmployee->updateInfo($_GET['updateInformation']);
         $this->load->view('update_info',$data);
 
+    }
+
+    /*Update Employee Information*/
+
+    public function updateInfo(){
+
+        if (isset($_POST['empid'])) {
+
+            $name = $_POST['empname'];
+            $gender = $_POST['gender'];
+            $status = $_POST['status'];
+            $address = $_POST['address'];
+            $phonenumber = $_POST['phonenumber'];
+            if (isset ($_POST['css'])) {
+                $css = 1;
+            } else {
+                $css = 0;
+            }
+            if (isset ($_POST['html'])) {
+                $html = 1;
+            } else {
+                $html = 0;
+            }
+            if (isset ($_POST['javascript'])) {
+                $javascript = 1;
+            } else {
+                $javascript = 0;
+            }
+            if (isset ($_POST['php'])) {
+                $php = 1;
+            } else {
+                $php = 0;
+            }
+
+            $this->load->model('AddEmployee');
+
+            $this->AddEmployee->updateEmp($_POST['empid'],$name, $gender, $status, $address, $phonenumber, $css, $html, $javascript, $php);
+        }
+        redirect('Add_EmpController/info');
 
 
     }

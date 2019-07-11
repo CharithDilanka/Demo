@@ -6,17 +6,18 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="<?php echo base_url(); ?>assets/js/sweetalert.min.js"></script>
 </head>
 <body style ="background-color: lightslategray" >
 
 <ul>
-    <li><a href="#home">Dilanka Enterprices</a></li>
+    <li><a href="<?php echo site_url('Add_EmpController/insert');?>">Dilanka Enterprices</a></li>
     <li style="float:right"><a class="active" href="<?php echo site_url('Add_EmpController/info');?>">Employee Infomation</a></li>
 </ul>
 
 <div class="container">
-    <h2 style="text-align: center;">Insert Employee Details</h2>
-    <form action="insert" method="post">
+    <h2 style="text-align: center;">Update Employee Details</h2>
+    <form action="updateInfo" method="post">
         <div class="form-group">
             <label for="empid">Employee id:</label>
             <input type="text" class="form-control" id="empid"  name="empid" value="<?php foreach ($emp as $row){ echo $row->emp_id;} ?>" readonly>
@@ -51,7 +52,7 @@
         </div>
         <div class="form-group">
             <label for="phonenumber">Phone Number:</label>
-            <input type="tel" class="form-control" pattern="[0-9]{9|10}" id="phonenumber" placeholder="Enter phone number" name="phonenumber" value="<?php foreach ($emp as $row){ echo $row->phone_number;} ?>"required>
+            <input type="tel" class="form-control" pattern="[0-9]{10}" id="phonenumber" placeholder="Enter phone number" name="phonenumber" value="<?php foreach ($emp as $row){ echo $row->phone_number;} ?>"required>
         </div>
         <div class="form-group">
             <label for="skills">Skills</label>
@@ -59,13 +60,13 @@
                 <label><input type="checkbox" name="css"  value="css" <?php foreach ($emp as $row){ if($row->css=='1'){ echo 'checked';}} ?>  id="css">CSS</label>
 
             <div class="checkbox">
-                <label><input type="checkbox" name="html" id="html">HTML</label>
+                <label><input type="checkbox" name="html" value="html" <?php foreach ($emp as $row){ if($row->html=='1'){ echo 'checked';}} ?> id="html">HTML</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="javascript" id="javascript">JAVASCRIPT</label>
+                <label><input type="checkbox" name="javascript" value="javascript" <?php foreach ($emp as $row){ if($row->javascript=='1'){ echo 'checked';}} ?>  id="javascript">JAVASCRIPT</label>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="php" id="php">PHP</label>
+                <label><input type="checkbox" name="php" value="php" <?php foreach ($emp as $row){ if($row->php=='1'){ echo 'checked';}} ?>  id="php">PHP</label>
             </div>
         </div>
         <br>
