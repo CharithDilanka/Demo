@@ -38,7 +38,7 @@
     </thead>
 
     <tbody>
-    <?php foreach($emp as $row){
+    <?php foreach($query->result() as $row){
         echo '
     
     <tr>
@@ -115,14 +115,21 @@
     </tbody>
 </table>
 
+<?php
+
+    echo $this->pagination->create_links();
+
+?>
+
+
 <div style="display: none;">
-    <form action="update" method="get" id="updateInformation">
+    <form action="<?php echo base_url('index.php/Add_EmpController/update')?>" method="get" id="updateInformation">
         <input type="text" name="updateInformation" id="update">
     </form>
 </div>
 
 <div style="display: none;">
-    <form action="delete" method="post" id="deleteInforamation">
+    <form action="<?php echo base_url('index.php/Add_EmpController/delete')?>" method="post" id="deleteInforamation">
         <input type="text" name="deleteInforamation" id="delete">
     </form>
 </div>

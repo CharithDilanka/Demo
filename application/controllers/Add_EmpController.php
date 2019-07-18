@@ -48,10 +48,28 @@ class Add_EmpController extends CI_Controller
 
     public function info()
     {
+        $this->load->library('pagination');
 
-        $this->load->model('AddEmployee');
+        $config['base_url'] = base_url().'index.php/Add_EmpController/info';
+        $config['per_page'] = 5;
+        $config['per_links'] = 5;
+        $config['total_rows'] = $this->db->get('emp_record')->num_rows();
 
-        $data['emp'] = $this->AddEmployee->tabledata();
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '<li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '<li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '<li>';
+        $config['cur_tag_open'] = '<li class="active"><a>';
+        $config['cur_tag_close'] = '</a></li>';
+
+
+
+        $this->pagination->initialize($config);
+        $data['query'] = $this->db->get('emp_record', $config['per_page'], $this->uri->segment(3));
 
         $this->load->view('employee_info', $data);
 
